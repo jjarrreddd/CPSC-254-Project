@@ -1,0 +1,11 @@
+body{
+background-image: url("images/languagebackground.jpg");
+}
+p{
+border-style: solid;
+border: 5px solid white;
+}
+h2{
+border-style: solid;
+border: 5px solid white;
+}
