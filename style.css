@@ -1,8 +1,68 @@
-p{
-border-style: solid;
-border: 5px solid white;
+* {
+box-sizing: border-box;
 }
-h2{
-border-style: solid;
-border: 5px solid white;
+body{
+font-family: Arial;
+padding: 10px;
+background: #ffeaae;
+}
+.header{
+background-color: #d64933;
+padding: 30px;
+text-align: center;
+}
+.header h1{
+font-size: 50px;
+}
+.topnav{
+overflow:hidden;
+background-color: #92dce5;
+}
+.topnav a{
+float: left;
+display: block;
+color: #000000;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+.topnav a:hover{
+background-color: #eee5e9;
+color:black;
+}
+.leftcolumn{
+float: left;
+width: 75%;
+}
+.rightcolumn{
+float: right;
+width: 25%;
+background-color: #eee5e9;
+padding-left: 20px;
+}
+.card{
+background-color: #7c7c7c;
+padding: 20px;
+margin-top: 20px;
+}
+.row::after{
+content:"";
+display: table;
+clear: both;
+}
+.footer{
+padding: 20px;
+text-align: center;
+background: #d64933;
+margin-top: 20px;
+}
+@media screen and (max-width: 800px){
+.leftcolumn, .rightcolumn{
+width: 100%;
+padding: 0;}
+}
+@media screen and (max-width: 400px){
+.topnav a{
+float: none;
+width: 100;}
 }
