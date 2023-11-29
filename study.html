@@ -5,13 +5,96 @@
 <h1>-- Study Tool --</h1>
 <h2>Study Created Decks</h2>
 
-<body>
+<body> 
 
-<p></p>
+<h3>Created Decks</h3>
+<p id="OutDecks"></p>
+
+<button onclick="ChooseDeck()">Choose Deck</button>
+
+<h3 id="QuizHead">Quiz Yourself</h3>
+
+<p id="OutCards"></p>
+
+<p id="QuizBoxes"></p>
+
+<h3>Cookie Debugging</h3>
+
 <button onclick="DebugCookies()">DebugCookies()</button>
-    
+<button onclick="ClearCookies()">ClearCookies()</button>
 
 <script>
+var deck = new Array();
+
+window.onload = DisplayDecks;
+
+function ChooseDeck()
+{
+    const deckName = prompt("Saved Deck Name (case sensitive): ");
+    if (deckName == null) return;
+    const newDeck = GetCookie(deckName);
+    //alert(newDeck);
+
+    if (newDeck.length == 0)
+    {
+        alert("ERROR: Deck does not exist");
+        return;
+    }
+    deck = JSON.parse(newDeck);
+    //document.getElementById("QuizHead").style.display="block";
+    alert("hello");
+    DisplayNotecards()
+}
+
+function DisplayNotecards()
+{
+    let text = "<ol>";
+    for (let i = 0; i < deck.length; i++)
+    {
+        text += "<li>" + deck[i][0] + "</li>";
+    }
+    text += "</ol>";
+
+    document.getElementById("OutCards").innerHTML = text;
+}
+
+function DisplayDecks()
+{
+    var cookies = document.cookie.split(';');
+    let text = "<ol>";
+    for (var i = 0; i < cookies.length; i++)
+    {
+        var cookie = cookies[i].split('=');
+        if (cookie[1] == null) continue; 
+        text += "<li>" + cookie[0] + "</li>";
+    }
+    text += "</ol>";
+
+    document.getElementById("OutDecks").innerHTML = text;
+}
+
+function GetCookie(cname) {
+    // Function from W3schools
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) 
+    {
+        let c = ca[i];
+       
+        while (c.charAt(0) == ' ') 
+        {
+            c = c.substring(1);
+        }
+       
+        if (c.indexOf(name) == 0) 
+        {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 function DebugCookies()
 {
     alert(document.cookie);

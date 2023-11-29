@@ -11,18 +11,29 @@
 text-align: left;" value="Definition goes here...">
 
 <p></p>
+<h3>Notecards</h3>
+
 <button onclick="CreateNotecard()">Create Notecard</button>
 <button onclick="DeleteNotecard()">Delete Notecard</button>
 
 <p id="OutCards"></p>
+
+<h3>Saved Decks</h3>
 
 <button onclick="SaveDeck()">Save Deck</button>
 <button onclick="LoadDeck()">Load Deck</button>
 
 <p id="OutDecks"></p>
 
+<h3>Back To Main Menu</h3>
+
+<button onclick="TransitionPage('flashcard.html')">Back</button>
+
+<h3>Cookie Debugging</h3>
+
 <button onclick="DebugCookies()">DebugCookies()</button>
 <button onclick="ClearCookies()">ClearCookies()</button>
+
 
 <script>
 var deck = new Array();
@@ -56,6 +67,7 @@ function SaveDeck()
 function LoadDeck()
 {
     const deckName = prompt("Saved Deck Name (case sensitive): ");
+    if (deckName == null) return;
     const newDeck = GetCookie(deckName);
     //alert(newDeck);
 
@@ -83,17 +95,12 @@ function DisplayNotecards()
 function DisplayDecks()
 {
     var cookies = document.cookie.split(';');
-    alert(cookies.length);
-    if (cookies.length <= 0)
-    {
-        return;
-    }
-
     let text = "<ol>";
     for (var i = 0; i < cookies.length; i++)
     {
         var cookie = cookies[i].split('=');
-        text += "<li>" + cookie[0] + ': ' + cookie[1] + "</li>";
+        if (cookie[1] == null) continue; 
+        text += "<li>" + cookie[0] + "</li>";
     }
     text += "</ol>";
 
@@ -146,6 +153,11 @@ function DebugCookies()
 {
     alert(document.cookie);
     DisplayDecks();
+}
+
+function TransitionPage(pageName)
+{
+	window.location.href = pageName;
 }
 </script>
 
