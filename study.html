@@ -14,9 +14,13 @@
 
 <h3 id="QuizHead">Quiz Yourself</h3>
 
+<p id="Score"></p>
+
 <p id="OutCards"></p>
 
 <p id="QuizBoxes"></p>
+
+<button onclick="CheckAnswers()">Check Answers</button>
 
 <h3>Cookie Debugging</h3>
 
@@ -26,7 +30,6 @@
 <script>
 var deck = new Array();
 
-window.onload = HideQuiz;
 window.onload = DisplayDecks;
 
 function ChooseDeck()
@@ -43,8 +46,35 @@ function ChooseDeck()
     }
     deck = JSON.parse(newDeck);
     //document.getElementById("QuizHead").style.display="block";
-    alert("hello");
-    DisplayNotecards()
+    //DisplayNotecards();
+    ShowQuizBoxes();
+}
+
+function CheckAnswers()
+{
+    var score = deck.length;
+    for (var i = 0; i < deck.length; i++)
+    {
+        const guess = document.getElementById(`Q${deck[i][0]}`).value;
+        const ans = deck[i][1];
+        if (guess != ans)
+        {
+            alert(`Card${i+1}. You put ${guess} but ${ans} is correct`);
+            score--;
+        }
+    }
+    var text = `${score} / ${deck.length}`;
+    document.getElementById("Score").innerHTML = text;
+}
+
+function ShowQuizBoxes()
+{    
+    let text = "";
+    for (var i = 0; i < deck.length; i++)
+    {
+        text += deck[i][0] + `<input id=Q${deck[i][0]}>` + "</input>" + "<br>";
+    }
+    document.getElementById("QuizBoxes").innerHTML = text;
 }
 
 function DisplayNotecards()
@@ -72,28 +102,6 @@ function DisplayDecks()
     text += "</ol>";
 
     document.getElementById("OutDecks").innerHTML = text;
-}
-
-function HideQuiz()
-{
-    var outCards = document.getElementById("OutCards");
-    var quizHead = document.getElementById("QuizHead");
-    var quizBoxes = document.getElementById("QuizBoxes");
-
-    outCards.style.display = "none";
-    quizHead.style.display = "none";
-    quizBoxes.style.display = "none";
-}
-
-function ShowQuiz()
-{
-    var outCards = document.getElementById("OutCards");
-    var quizHead = document.getElementById("QuizHead");
-    var quizBoxes = document.getElementById("QuizBoxes");
-
-    outCards.style.display = "block";
-    quizHead.style.display = "block";
-    quizBoxes.style.display = "block";
 }
 
 function GetCookie(cname) {
@@ -129,3 +137,4 @@ function DebugCookies()
 
 </body>
 </html>
+
