@@ -80,7 +80,20 @@ function HideQuiz()
     var quizHead = document.getElementById("QuizHead");
     var quizBoxes = document.getElementById("QuizBoxes");
 
+    outCards.style.display = "none";
     quizHead.style.display = "none";
+    quizBoxes.style.display = "none";
+}
+
+function ShowQuiz()
+{
+    var outCards = document.getElementById("OutCards");
+    var quizHead = document.getElementById("QuizHead");
+    var quizBoxes = document.getElementById("QuizBoxes");
+
+    outCards.style.display = "block";
+    quizHead.style.display = "block";
+    quizBoxes.style.display = "block";
 }
 
 function GetCookie(cname) {
