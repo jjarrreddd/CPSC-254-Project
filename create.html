@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>-- Deck Builder --</h1>
+<h2> Create a new notecard</h2>
+
+<p>Word &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp; Definition</p>
+<input type="text" id="InWord" value="Word goes here...">
+<input type="text" id="InDef" style="width: 300px; height: 150px; vertical-align: top;
+text-align: left;" value="Definition goes here...">
+
+<p></p>
+<button onclick="CreateNotecard()">Create Notecard</button>
+<button onclick="DeleteNotecard()">Delete Notecard</button>
+
+<p id="OutDeck"></p>
+
+<button onclick="SaveDeck()">Save Deck</button>
+<button onclick="DebugCookies()">Debug Cookies</button>
+
+<p id="test"></p>
+
+<script>
+var deck = new Array();
+
+function CreateNotecard() 
+{
+    const word = document.getElementById("InWord").value;
+    const def = document.getElementById("InDef").value;
+
+    const card = [word, def]
+
+    deck.push(card);
+    DisplayDeck();
+}
+
+function DeleteNotecard()
+{
+    deck.pop();
+    DisplayDeck();
+}
+
+function SaveDeck()
+{
+    let deckName = prompt("Please name your deck");
+    SetCookie(deckName, deck, 14);
+}
+
+function LoadDeck()
+{
+    const cookie = document.cookie;
+    const foo = cookie.split(';')[0].split('=')[1];
+    document.getElementById("test").innerHTML = foo;
+}
+
+function DisplayDeck()
+{
+    let text = "<ol>";
+    for (let i = 0; i < deck.length; i++)
+    {
+        text += "<li>" + deck[i][0] + " : " + deck[i][1] + "</li>";
+    }
+    text += "</ol>";
+
+    document.getElementById("OutDeck").innerHTML = text;
+}
+
+// Cookie Functions
+function SetCookie(cname, cvalue, exdays) 
+{
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function DebugCookies()
+{
+    alert(document.cookie);
+    var allcookies = document.cookie;
+    var cookiearray = allcookies.split(";");
+    var cookiedisplay = ""; 
+
+    for (var i = 0; i < cookiearray.length; i++) 
+    {
+        name = cookiearray[i].split('=')[0];
+        value = cookiearray[i].split('=')[1];
+    }
+}
+</script>
+
+</body>
+</html>
