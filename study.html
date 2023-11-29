@@ -22,6 +22,10 @@
 
 <button onclick="CheckAnswers()">Check Answers</button>
 
+<h3>Back To Main Menu</h3>
+
+<button onclick="TransitionPage('flashcard.html')">Back</button>
+
 <h3>Cookie Debugging</h3>
 
 <button onclick="DebugCookies()">DebugCookies()</button>
@@ -129,6 +133,11 @@ function GetCookie(cname) {
 function DebugCookies()
 {
     alert(document.cookie);
+}
+
+function TransitionPage(pageName)
+{
+	window.location.href = pageName;
 }
 
 </script>
