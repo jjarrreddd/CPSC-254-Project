@@ -20,8 +20,19 @@
 	 Phasellus justo sem, placerat vitae pharetra pharetra, lobortis quis sem.
 	</p>
 	</article>
-<button style="font-size:50px; position: absolute; bottom: 90px; left: 700px;">New Deck</button>
-<button style="font-size:50px; position: absolute; bottom: 90px; right: 700px;">Load Deck</button>
+<button onclick="TransitionPage('create.html')" style="font-size:50px; position: absolute; bottom: 90px; left: 700px;">Deck Builder</button>
+<button onclick="TransitionPage('study.html')" style="font-size:50px; position: absolute; bottom: 90px; right: 700px;">Study Tool</button>
+
+<script>
+function TransitionPage(pageName)
+{
+	window.location.href = pageName;
+}
+
+
+</script>
+
+
 </body>
 
 
