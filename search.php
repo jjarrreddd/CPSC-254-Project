@@ -1,3 +1,23 @@
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+	$decksearch = $_POST["decksearch"];
+	try{
+		require_once "includes/dbh-inc.php";
+		$query = "SELECT * FROM decks WHERE deckname = :decksearch;";
+		$stmt = $pdo->prepare($query);
+		$stmt->bindParam(":decksearch",$decksearch);
+		$stmt->execute();
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$pdo = null;
+		$stmt = null;
+	} catch(PDOException $e){
+		die("Query failed:".$e->getMessage());
+	}
+}
+
+else{
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,13 +168,21 @@ function TransitionPage(pageName)
 }
 
 </script>
-<form class="searchform" action="search.php" method="post">
-	<label for="search">Search for deck:</label>
-	<input id="search" type="text" name="decksearch" placeholder="Search..">
-	<button>Search</button>
-</form>
+<h3>SEARCH RESULTS</h3>
+<?php
+if(empty($results)){
+	echo"<div>";
+	echo"<p>There were no results!</p>";
+	echo "</div>"
+}
+else{
+	foreach($results as $row){
+	echo $row["deckName"]>>results.txt;
+	echo $row["InWord"]>>results.txt;
+	echo $row["InDef"]>>results.txt;
+	}
+}
+?>
 </body>
-
 </body>
 </html>
-

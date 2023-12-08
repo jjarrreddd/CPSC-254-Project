@@ -166,6 +166,12 @@ function TransitionPage(pageName)
 	window.location.href = pageName;
 }
 </script>
-
+<h3> CREATE A DECK</h3>
+<form action="includes/deckhandler-inc.php"method="post">
+	<input type="text" name="deckName" placeholder="deckName">
+	<input type="text" name="InWord" placeholder="InWord">
+	<input type="text" name="InDef" placeholder="InDef">
+	<button>Create</button>
+</form>
 </body>
 </html>
